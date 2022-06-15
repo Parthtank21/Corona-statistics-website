@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>COVID-19 Dashboard</title>
+  <link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body class="sb-nav-fixed" ng-app="covidApp" ng-controller="covidCtrl">
+  <nav class="sb-topnav navbar navbar-expand navbar-dark bg-secondary bg-gradient">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="index.html">COVID-19 Dashboard</a>
+  </nav>
+  <div id="layoutSidenav">
+    <div id="layoutSidenav_content">
+      <main class="bg-light bg-gradient">
+        <div class="container-fluid px-4">
+          <h2 class="mt-4">Global Summary</h2>
+          <br />
+          <div class="row">
+            <div class="col-xl-3 col-md-6 ">
+              <div class="card bg-primary text-white mb-4 shadow bg-gradient">
+                <h2 class="card-body">{{ statistics.location }}</h2>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                  <b class="small text-white stretched-link" href="#">Location</b>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card bg-warning text-white mb-4 shadow bg-gradient">
+                <h2 class="card-body">{{ statistics.confirmed }}</h2>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                  <b class="small text-white stretched-link" href="#">Total</b>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card bg-success text-white mb-4 shadow bg-gradient">
+                <h2 class="card-body">
+                  {{ statistics.confirmed - statistics.deaths }}
+                </h2>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                  <b class="small text-white stretched-link" href="#">Recovered</b>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card bg-danger text-white mb-4 shadow bg-gradient">
+                <h2 class="card-body">{{ statistics.deaths }}</h2>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                  <b class="small text-white stretched-link" href="#">Deaths</b>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-4 shadow">
+            <div class="card-header">
+              <i class="fas fa-table me-1"></i>
+              <b>Last Updated: </b><label>{{ statistics.lastReported | date : "fullDate" }}</label>
+            </div>
+            <div class="card-body">
+              <div class="dataTable-top">
+                <div class="dataTable-dropdown">
+                  <label><select class="dataTable-selector">
+                      <option value="5">5</option>
+                      <option value="10" selected="">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="25">25</option>
+                    </select>
+                    entries per page</label>
+                </div>
+                <div class="dataTable-search">
+                  <input class="dataTable-input" placeholder="Search..." type="text" ng-model="searchText" />
+                </div>
+              </div>
+
+              <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                <div class="dataTable-container">
+                  <table id="datatablesSimple" class="dataTable-table table-light">
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th>Country</th>
+                        <th>Continent</th>
+                        <th>Population</th>
+                        <th>Total tests</th>
+                        <th>Active</th>
+                        <th>Recovered</th>
+                        <th>Deaths</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="country in countries | filter:searchText">
+                        <td>{{ $index+1 }}</td>
+                        <td>{{ country.country }}</td>
+                        <td>{{ country.continent }}</td>
+                        <td>{{ country.population }}</td>
+                        <td>{{ country.tests.total}}</td>
+                        <td>{{ country.cases.active }}</td>
+                        <td>{{ country.cases.recovered }}</td>
+                        <td>{{ country.deaths.total }}</td>
+                        <td>{{ country.cases.total }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <p></p>
+      <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+          <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">Copyright &copy; COVID-19</div>
+            <div>
+              <a href="#">Privacy Policy</a>
+              &middot;
+              <a href="#">Terms &amp; Conditions</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</body>
+<script src="js/angular.min.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/app.js"></script>
+</html>
