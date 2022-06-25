@@ -8,8 +8,8 @@ angular.module("covidApp", []).controller("covidCtrl", ($scope, $http) => {
             "method": 'GET',
             url: 'https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total',
             headers: {
-                'x-rapidapi-host': 'covid-19-coronavirus-statistics.p.rapidapi.com',
-                'x-rapidapi-key': '08224f35bamsh4c4c89502b04efcp1f848ajsn059dd577e6d1'
+                'x-rapidapi-host': '',
+                'x-rapidapi-key': ''
             }
         }).then((res) => {
             $scope.dataAvail = true;
@@ -21,8 +21,8 @@ angular.module("covidApp", []).controller("covidCtrl", ($scope, $http) => {
             method: 'GET',
             url: 'https://covid-193.p.rapidapi.com/statistics',
             headers: {
-                'x-rapidapi-host': 'covid-193.p.rapidapi.com',
-                'x-rapidapi-key': '08224f35bamsh4c4c89502b04efcp1f848ajsn059dd577e6d1'
+                'x-rapidapi-host': '',
+                'x-rapidapi-key': ''
             }
             }).then((res) => {
                 $scope.dataAvail = true;
